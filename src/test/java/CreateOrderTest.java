@@ -67,7 +67,8 @@ public class CreateOrderTest {
     @Description("Post запрос на ручку /api/orders без ингредиентов.")
     @Step("Создание заказа без ингредиентов без авторизации")
     public void createOrderWithoutAuthNoIngredient() {
-        OrderStellar orderStellar = new OrderStellar(null);
+        // Передаем пустой список вместо null
+        OrderStellar orderStellar = new OrderStellar(new ArrayList<>());
         ValidatableResponse response = orderClient.orderWithoutAuth(orderStellar)
                 .assertThat().statusCode(HTTP_BAD_REQUEST);
         response.assertThat().body("success", equalTo(false))
@@ -107,7 +108,8 @@ public class CreateOrderTest {
         String accessTokenWithBearer = responseCreate.extract().path("accessToken");
         String accessToken = accessTokenWithBearer.replace("Bearer ", "");
 
-        OrderStellar orderStellar = new OrderStellar(null);
+        // Передаем пустой список вместо null
+        OrderStellar orderStellar = new OrderStellar(new ArrayList<>());
         ValidatableResponse response = orderClient.orderWithAuth(accessToken, orderStellar)
                 .assertThat().statusCode(HTTP_BAD_REQUEST);
         response.assertThat().body("success", equalTo(false))

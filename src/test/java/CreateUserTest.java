@@ -68,21 +68,24 @@ public class CreateUserTest {
     @DisplayName("Создать пользователя без пароля. Ожидаемый ответ: 403")
     @Description("Post запрос на ручку /api/auth/register для создания пользователя без пароля.")
     public void createUserWithoutPasswordTest() {
-        handleCreateUserWithoutField(new UserStellar(TestValue.TEST_LOGIN_ONE, null, TestValue.TEST_NAME_ONE));
+        // Передаем пустую строку вместо null
+        handleCreateUserWithoutField(new UserStellar(TestValue.TEST_LOGIN_ONE, "", TestValue.TEST_NAME_ONE));
     }
 
     @Test
     @DisplayName("Создать пользователя без email. Ожидаемый ответ: 403")
     @Description("Post запрос на ручку /api/auth/register для создания пользователя без email.")
     public void createUserWithoutEmailTest() {
-        handleCreateUserWithoutField(new UserStellar(null, TestValue.TEST_PASSWORD_ONE, TestValue.TEST_NAME_ONE));
+        // Передаем пустую строку вместо null
+        handleCreateUserWithoutField(new UserStellar("", TestValue.TEST_PASSWORD_ONE, TestValue.TEST_NAME_ONE));
     }
 
     @Test
     @DisplayName("Создать пользователя без имени. Ожидаемый ответ: 403")
     @Description("Post запрос на ручку /api/auth/register для создания пользователя без имени.")
     public void createUserWithoutNameTest() {
-        handleCreateUserWithoutField(new UserStellar(TestValue.TEST_LOGIN_ONE, TestValue.TEST_PASSWORD_ONE, null));
+        // Передаем пустую строку вместо null
+        handleCreateUserWithoutField(new UserStellar(TestValue.TEST_LOGIN_ONE, TestValue.TEST_PASSWORD_ONE, ""));
     }
 
     @Step("Обработка создания пользователя с пропущенным обязательным полем")
